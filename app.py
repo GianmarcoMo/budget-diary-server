@@ -1,3 +1,4 @@
+import os
 from bson import ObjectId
 from flask import Flask, request
 from flask_cors import CORS
@@ -15,6 +16,18 @@ from logic.database.db_utils import (
 app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
+
+
+@app.route("/")
+def index():
+    greeting = ""
+    try:
+        excited = os.environ["TEST_ENV"]
+        greeting = excited + "!!!!!"
+    except:
+        pass
+
+    return greeting
 
 
 @app.get("/create_db")
