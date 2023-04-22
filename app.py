@@ -75,7 +75,3 @@ def deleteMovement():
         return {"message": "Deleted movement"}
     except:
         return {"message": "Error while connecting to database"}
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
