@@ -20,19 +20,11 @@ app.config["CORS_HEADERS"] = "Content-Type"
 @app.get("/get_movements")
 def allMovements():
     try:
-        print("entro")
         connection = create_connection()
-        print("connessione creata")
-
         db = create_database(connection, "budget-diary-db")
-        print("db creato ")
-
         collection = create_collection(db, "expenses")
-        print("collection creata ")
 
         movements = get_all_movements(collection)
-
-        print(movements)
         connection.close()
         return dumps(movements)
     except:
