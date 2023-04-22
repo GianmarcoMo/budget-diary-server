@@ -1,4 +1,3 @@
-import os
 from bson import ObjectId
 from flask import Flask, request
 from flask_cors import CORS
@@ -18,20 +17,7 @@ cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
 
-@app.route("/")
-def index():
-    greeting = ""
-    try:
-        excited = os.environ["TEST_ENV"]
-        greeting = excited + "!!!!!"
-    except:
-        pass
-
-    return {"message:": greeting}
-
-
-@app.get("/create_db")
-def testParam():
+def createDB():
     try:
         connection = create_connection()
         db = create_database(connection, "budget-diary-db")
@@ -49,8 +35,10 @@ def allMovements():
         connection = create_connection()
         db = create_database(connection, "budget-diary-db")
         collection = create_collection(db, "expenses")
+
         movements = get_all_movements(collection)
 
+        print(movements)
         connection.close()
         return dumps(movements)
     except:
@@ -65,7 +53,9 @@ def addMovement():
         db = create_database(connection, "budget-diary-db")
         collection = create_collection(db, "expenses")
 
-        insert_one_movement(collection, data)
+        result = insert_one_movement(collection, data)
+
+        print(result)
 
         connection.close()
         return {"message": "Added movement"}

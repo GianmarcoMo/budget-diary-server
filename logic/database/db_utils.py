@@ -6,10 +6,7 @@ load_dotenv()
 
 
 def create_connection():
-    URI_DB = ""
-    is_prod = os.environ.get("IS_HEROKU", None)
-    if is_prod:
-        URI_DB = os.getenv("URI_MONGODB")
+    URI_DB = os.getenv("URI_MONGODB")
     try:
         # connection to local mongodb server
         conn = MongoClient(URI_DB)
