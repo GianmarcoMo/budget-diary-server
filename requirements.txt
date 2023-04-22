@@ -1,4 +1,4 @@
 pymongo>4.3.2, <=4.3.3
 flask>2.2.2, <=2.2.3
 flask_cors>3.0.9, <=3.0.10
-dotenv> 0.21.1, <=1.0.0
+python-dotenv> 0.21.1, <=1.0.0
