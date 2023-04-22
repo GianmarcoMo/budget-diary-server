@@ -1,6 +1,6 @@
 from bson import ObjectId
 from flask import Flask, request
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from insert_movements import insert_one_movement
 from logic.database.db_data import get_all_movements
 from bson.json_util import dumps
