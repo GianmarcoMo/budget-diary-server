@@ -17,20 +17,9 @@ cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
 
-def createDB():
-    try:
-        connection = create_connection()
-        db = create_database(connection, "budget-diary-db")
-        create_collection(db, "expenses")
-
-        connection.close()
-        return {"message": "Created database with collections"}
-    except:
-        return {"message": "Error while connecting to database"}
-
-
 @app.get("/get_movements")
 def allMovements():
+    print("get_movements")
     try:
         connection = create_connection()
         db = create_database(connection, "budget-diary-db")
@@ -42,6 +31,7 @@ def allMovements():
         connection.close()
         return dumps(movements)
     except:
+        print("exception")
         return {"message": "Error while connecting to database"}
 
 
@@ -80,6 +70,17 @@ def deleteMovement():
         return {"message": "Error while connecting to database"}
 
 
+def createDB():
+    try:
+        connection = create_connection()
+        db = create_database(connection, "budget-diary-db")
+        create_collection(db, "expenses")
+
+        connection.close()
+        return {"message": "Created database with collections"}
+    except:
+        return {"message": "Error while connecting to database"}
+
+
 if __name__ == "__main__":
-    result = createDB()
     app.run()

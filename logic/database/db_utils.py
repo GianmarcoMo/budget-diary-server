@@ -8,6 +8,7 @@ load_dotenv()
 
 def create_connection():
     URI_DB = os.getenv("URI_MONGODB")
+    print(URI_DB)
     try:
         # connection to local mongodb server
         conn = MongoClient(URI_DB)
