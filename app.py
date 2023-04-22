@@ -27,7 +27,7 @@ def index():
     except:
         pass
 
-    return greeting
+    return {"message:": greeting}
 
 
 @app.get("/create_db")
