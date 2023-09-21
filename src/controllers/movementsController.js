@@ -1,13 +1,20 @@
-function getAllMovements() {
-    return [
-        {
-            id: 1,
-            name: "test"
-        }
-    ];
+const {createConnectionToDB, getCollection} = require("./databaseController.js")
+
+async function getAllMovements() {
+    try {
+        await createConnectionToDB();
+        const movementsCollection = getCollection("budget-diary", "movements");
+        const allMovemnets = movementsCollection.find();
+        return allMovemnets;
+    } catch (error) {
+        throw new Error("Movements not found!");
+    }
+
 }
 
-function getMovementById(id) {
+async function getMovementById(id) {
+    await db.createConnectionToDB();
+
     throw new Error("Movement's id not found!");
 }
 
