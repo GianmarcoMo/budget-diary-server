@@ -8,7 +8,7 @@ async function createConnectionToDB() {
   try {
     await client.connect();
   } catch (error) {
-    console.error("Error: ", error);
+    console.error(`Error: ${error}`);
   }
 }
 
@@ -16,7 +16,7 @@ async function closeConnectionToDB() {
   try {
     await client.close();  
   } catch (error) {
-    console.error("Error to close connection: ", error)
+    console.error(`Error to close connection: ${error}`)
   }
 }
 
@@ -33,4 +33,18 @@ function getCollection(dbName, collectionName) {
   }
 }
 
-module.exports = {createConnectionToDB, getCollection, closeConnectionToDB}
+async function writeSingleDocument(dataToWrite, collection) {
+if (!dataToWrite) {
+    throw new Error("The document must contains a values");
+  }
+
+  try {
+    const result = await collection.insertOne(dataToWrite);
+    return result.insertedId;
+    
+  } catch (error) {
+    throw new Error(`Error to insert the document: ${error}`);
+  }
+}
+
+module.exports = {createConnectionToDB, getCollection, closeConnectionToDB, writeSingleDocument}
